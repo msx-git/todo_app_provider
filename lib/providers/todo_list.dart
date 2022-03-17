@@ -7,9 +7,7 @@ class TodoListState extends Equatable {
   const TodoListState({required this.todos});
 
   factory TodoListState.initial() {
-    return TodoListState(todos: [
-      Todo(id: '1', desc: 'Learn Flutter'),
-    ]);
+    return const TodoListState(todos: []);
   }
 
   @override
