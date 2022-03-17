@@ -8,9 +8,9 @@ class TodoListState extends Equatable {
 
   factory TodoListState.initial() {
     return TodoListState(todos: [
-      Todo(id: '1', desc: 'Clean the room'),
-      Todo(id: '2', desc: 'Wash the dishes'),
-      Todo(id: '3', desc: 'Do sleep'),
+      Todo(id: '1', desc: 'Wake up at 5:00 a.m'),
+      Todo(id: '2', desc: 'Have breakfast'),
+      Todo(id: '3', desc: 'Learn Flutter'),
     ]);
   }
 
