@@ -10,10 +10,6 @@ class FilteredTodosState extends Equatable {
 
   const FilteredTodosState({required this.filteredTodos});
 
-  factory FilteredTodosState.initial() {
-    return const FilteredTodosState(filteredTodos: []);
-  }
-
   @override
   List<Object> get props => [filteredTodos];
 
@@ -30,8 +26,14 @@ class FilteredTodosState extends Equatable {
 }
 
 class FilteredTodos with ChangeNotifier {
-  FilteredTodosState _state = FilteredTodosState.initial();
+  late FilteredTodosState _state ;
   FilteredTodosState get state => _state;
+
+  final List<Todo> initialFilteredTodos;
+  FilteredTodos({required this.initialFilteredTodos}){
+    _state = FilteredTodosState(filteredTodos: initialFilteredTodos);
+  }
+
 
   void update(TodoFilter todoFilter, TodoSearch todoSearch, TodoList todoList) {
     List<Todo> _filteredTodos;

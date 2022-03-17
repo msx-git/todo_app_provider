@@ -9,45 +9,45 @@ class ShowTodos extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final todos = context.watch<FilteredTodos>().state.filteredTodos;
-    return ListView.separated(
-      primary: false,
-      shrinkWrap: true,
-      itemCount: todos.length,
-      itemBuilder: (BuildContext context, int index) {
-        return Dismissible(
-            background: showBackground(0),
-            secondaryBackground: showBackground(1),
-            key: ValueKey(todos[index].id),
-            onDismissed: (_) {
-              context.read<TodoList>().removeTodo(todos[index]);
-            },
-            confirmDismiss: (_) {
-              return showDialog(
-                context: context,
-                barrierDismissible: false,
-                builder: (context) {
-                  return AlertDialog(
-                    title: const Text('Are you sure?'),
-                    content: const Text('Do you really want to delete?'),
-                    actions: [
-                      TextButton(
-                        onPressed: () => Navigator.pop(context, false),
-                        child: const Text('NO'),
-                      ),
-                      TextButton(
-                        onPressed: () => Navigator.pop(context, true),
-                        child: const Text('YES'),
-                      )
-                    ],
-                  );
-                },
-              );
-            },
-            child: TodoItem(todo: todos[index]));
-      },
-      separatorBuilder: (BuildContext context, int index) {
-        return const Divider(color: Colors.grey);
-      },
+    return Expanded(
+      child: ListView.separated(
+        itemCount: todos.length,
+        itemBuilder: (BuildContext context, int index) {
+          return Dismissible(
+              background: showBackground(0),
+              secondaryBackground: showBackground(1),
+              key: ValueKey(todos[index].id),
+              onDismissed: (_) {
+                context.read<TodoList>().removeTodo(todos[index]);
+              },
+              confirmDismiss: (_) {
+                return showDialog(
+                  context: context,
+                  barrierDismissible: false,
+                  builder: (context) {
+                    return AlertDialog(
+                      title: const Text('Are you sure?'),
+                      content: const Text('Do you really want to delete?'),
+                      actions: [
+                        TextButton(
+                          onPressed: () => Navigator.pop(context, false),
+                          child: const Text('NO'),
+                        ),
+                        TextButton(
+                          onPressed: () => Navigator.pop(context, true),
+                          child: const Text('YES'),
+                        )
+                      ],
+                    );
+                  },
+                );
+              },
+              child: TodoItem(todo: todos[index]));
+        },
+        separatorBuilder: (BuildContext context, int index) {
+          return const Divider(color: Colors.grey);
+        },
+      ),
     );
   }
 
